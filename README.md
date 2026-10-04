@@ -127,14 +127,14 @@ git push origin v0.2.0
 The resulting Packwiz-compatible download URL is stable and version-specific:
 
 ```text
-https://github.com/DigitsCodeCompendium/minecraft_mod.terraSkills/releases/download/v0.2.0/terraskills-0.2.0.jar
+https://github.com/digitsTerraDev/mod.terraSkills/releases/download/v0.2.0/terraskills-0.2.0.jar
 ```
 
 In the Packwiz repository, add the GitHub project with Packwiz's GitHub provider.
 The regex selects the mod JAR instead of the checksum asset:
 
 ```powershell
-packwiz github add DigitsCodeCompendium/minecraft_mod.terraSkills --regex '^terraskills-[0-9].*\.jar$'
+packwiz github add digitsTerraDev/mod.terraSkills --regex '^terraskills-[0-9].*\.jar$'
 ```
 
 Once a newer tagged release exists, update it normally through Packwiz:

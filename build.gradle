@@ -40,7 +40,7 @@ repositories {
         // through a Maven repository, so resolve it with an artifact-only layout.
         ivy {
             name = 'TerraLibGitHubReleases'
-            url = uri('https://github.com/DigitsCodeCompendium/minecraft_mod.terraLib/releases/download')
+            url = uri('https://github.com/digitsTerraDev/mod.terraLib/releases/download')
             patternLayout {
                 artifact 'v[revision]/[artifact]-[revision].[ext]'
             }

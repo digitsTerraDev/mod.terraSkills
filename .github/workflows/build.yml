@@ -20,7 +20,7 @@ jobs:
       - name: Checkout TerraLib
         uses: actions/checkout@v7
         with:
-          repository: DigitsCodeCompendium/minecraft_mod.terraLib
+          repository: digitsTerraDev/mod.terraLib
           ref: v0.1.0
           path: terralib
 
