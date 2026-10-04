@@ -1,7 +1,7 @@
 {
-  "warrior_1": { "title": "Warrior 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "wooden_sword" } }, "cost": 1 },
-  "warrior_2": { "title": "Warrior 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "stone_sword" } }, "cost": 1 },
-  "warrior_3": { "title": "Warrior 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "iron_sword" } }, "cost": 1 },
-  "warrior_4": { "title": "Warrior 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "golden_sword" } }, "cost": 1 },
-  "warrior_5": { "title": "Warrior 5", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "diamond_sword" } }, "cost": 1 }
+  "warrior_1": { "title": "Warrior 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "wooden_sword" } }, "cost": 10 },
+  "warrior_2": { "title": "Warrior 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "stone_sword" } }, "cost": 20 },
+  "warrior_3": { "title": "Warrior 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "iron_sword" } }, "cost": 40 },
+  "warrior_4": { "title": "Warrior 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "golden_sword" } }, "cost": 70 },
+  "warrior_5": { "title": "Warrior 5", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "diamond_sword" } }, "cost": 110 }
 }

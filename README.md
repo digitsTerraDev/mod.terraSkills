@@ -3,6 +3,12 @@
 TerraSkills is a NeoForge 1.21.1 integration mod for TerraFirmaCraft's nutrition
 system and Pufferfish's Skills.
 
+## Research queue
+
+TerraSkills treats each Pufferfish node as timed research. Its Pufferfish `cost` is the number of research points required; balanced TFC nutrition supplies the base point rate and each node's two configured RPG-stat affinities modify that rate. Only the first queue item progresses, and moving an item preserves its fractional progress.
+
+Press `R` (configurable under TerraSkills controls) to open the custom research screen. TerraSkills clears points awarded by older TerraSkills versions on login. `/ts research list`, `/ts research move <from> <to>`, and `/ts research cancel <index>` manage the queue.
+
 ## Development setup
 
 - Java 21

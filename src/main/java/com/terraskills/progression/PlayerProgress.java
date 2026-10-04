@@ -3,10 +3,13 @@ package com.terraskills.progression;
 import com.terraskills.TerraSkills;
 import com.terraskills.config.TerraSkillsConfig;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class PlayerProgress {
     private static final String ROOT_KEY = TerraSkills.MOD_ID + ":progress";
@@ -15,6 +18,7 @@ public final class PlayerProgress {
     private static final String LAST_REAL_TIME = "lastRealTimeMillis";
     private static final String STATS = "stats";
     private static final String NUTRITION_MESSAGES = "nutritionMessages";
+    private static final String RESEARCH_QUEUE = "researchQueue";
 
     private PlayerProgress() {}
 
@@ -72,6 +76,31 @@ public final class PlayerProgress {
 
     public static void setNutritionMessagesEnabled(ServerPlayer player, boolean enabled) {
         data(player).putBoolean(NUTRITION_MESSAGES, enabled);
+    }
+
+    public record ResearchEntry(ResourceLocation category, String skill, double points) {}
+
+    public static List<ResearchEntry> researchQueue(ServerPlayer player) {
+        List<ResearchEntry> queue = new ArrayList<>();
+        for (var element : data(player).getList(RESEARCH_QUEUE, CompoundTag.TAG_COMPOUND)) {
+            CompoundTag entry = (CompoundTag) element;
+            ResourceLocation category = ResourceLocation.tryParse(entry.getString("category"));
+            String skill = entry.getString("skill");
+            if (category != null && !skill.isBlank()) queue.add(new ResearchEntry(category, skill, Math.max(0, entry.getDouble("points"))));
+        }
+        return queue;
+    }
+
+    public static void setResearchQueue(ServerPlayer player, List<ResearchEntry> queue) {
+        ListTag encoded = new ListTag();
+        for (ResearchEntry entry : queue) {
+            CompoundTag value = new CompoundTag();
+            value.putString("category", entry.category().toString());
+            value.putString("skill", entry.skill());
+            value.putDouble("points", Math.max(0, entry.points()));
+            encoded.add(value);
+        }
+        data(player).put(RESEARCH_QUEUE, encoded);
     }
 
     public static void copy(ServerPlayer oldPlayer, ServerPlayer newPlayer) {

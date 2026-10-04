@@ -76,5 +76,20 @@
   "attribute.name.terraskills.finesse": "Finesse",
   "attribute.name.terraskills.endurance": "Endurance",
   "attribute.name.terraskills.intelligence": "Intelligence",
-  "attribute.name.terraskills.instinct": "Instinct"
+  "attribute.name.terraskills.instinct": "Instinct",
+
+  "key.categories.terraskills": "TerraSkills",
+  "key.terraskills.open_research": "Open Research",
+  "terraskills.research.title": "Research",
+  "terraskills.research.search": "Search research...",
+  "terraskills.research.available": "Click an available research to add it to your queue",
+  "terraskills.research.none": "No research matches your search",
+  "terraskills.research.trees": "Skill Trees",
+  "terraskills.research.skills": "Skills",
+  "terraskills.research.details": "Research Details",
+  "terraskills.research.cost": "Next-level cost",
+  "terraskills.research.bonuses": "Research bonuses",
+  "terraskills.research.hover_hint": "Hover a skill for details",
+  "terraskills.research.queue": "Training Queue",
+  "terraskills.research.queue_empty": "No research queued"
 }

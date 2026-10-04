@@ -1,1 +1,11 @@
-{ "normal": { "bidirectional": [["miner_1", "miner_2"], ["miner_2", "miner_3"], ["miner_3", "miner_4"], ["miner_4", "miner_5"]] } }
+{ "normal": { "unidirectional": [
+  ["miner_1","miner_2"],["miner_2","miner_3"],["miner_3","miner_4"],["miner_4","miner_5"],
+  ["ore_fortune_1","ore_fortune_2"],["ore_fortune_2","ore_fortune_3"],["ore_fortune_3","ore_fortune_4"],["ore_fortune_4","ore_fortune_5"],
+  ["prospecting_1","prospecting_2"],["prospecting_2","prospecting_3"],["prospecting_3","prospecting_4"],["prospecting_4","prospecting_5"],
+  ["stoneworking_1","stoneworking_2"],["stoneworking_2","stoneworking_3"],["stoneworking_3","stoneworking_4"],["stoneworking_4","stoneworking_5"],
+  ["deep_mining_1","deep_mining_2"],["deep_mining_2","deep_mining_3"],["deep_mining_3","deep_mining_4"],["deep_mining_4","deep_mining_5"],
+  ["tool_conservation_1","tool_conservation_2"],["tool_conservation_2","tool_conservation_3"],["tool_conservation_3","tool_conservation_4"],["tool_conservation_4","tool_conservation_5"],
+  ["gemology_1","gemology_2"],["gemology_2","gemology_3"],["gemology_3","gemology_4"],["gemology_4","gemology_5"],
+  ["motherlode_1","motherlode_2"],["motherlode_2","motherlode_3"],["motherlode_3","motherlode_4"],["motherlode_4","motherlode_5"],
+  ["miner_2","ore_fortune_1"],["miner_2","prospecting_1"],["miner_3","stoneworking_1"],["miner_3","deep_mining_1"],["prospecting_2","gemology_1"],["miner_4","tool_conservation_1"],["ore_fortune_3","motherlode_1"],["deep_mining_3","motherlode_1"]
+] } }

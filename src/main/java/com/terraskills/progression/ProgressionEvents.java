@@ -3,6 +3,7 @@ package com.terraskills.progression;
 import com.terraskills.TerraSkills;
 import com.terraskills.config.TerraSkillsConfig;
 import com.terraskills.network.SkillProgressPayload;
+import com.terraskills.research.ResearchService;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -16,8 +17,11 @@ public final class ProgressionEvents {
 
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player && !TerraSkillsConfig.ACCRUE_WHILE_OFFLINE.get()) {
-            PlayerProgress.setLastRealTimeMillis(player, System.currentTimeMillis());
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ResearchService.clearLegacyNutritionPoints(player);
+            if (!TerraSkillsConfig.ACCRUE_WHILE_OFFLINE.get()) {
+                PlayerProgress.setLastRealTimeMillis(player, System.currentTimeMillis());
+            }
         }
     }
 
@@ -42,13 +46,7 @@ public final class ProgressionEvents {
             return;
         }
 
-        PlayerProgress.selectedTree(player).flatMap(SkillTreeDefinition::find).ifPresent(tree -> {
-            double millisecondsPerDay = TerraSkillsConfig.REAL_MINUTES_PER_DAY.get() * 60_000.0;
-            double days = (now - previous) / millisecondsPerDay;
-            double generated = SkillPointGeneration.calculate(player, tree).totalPerDay() * days;
-            PlayerProgress.setAccumulatedPoints(player, tree.id(), PlayerProgress.accumulatedPoints(player, tree.id()) + generated);
-            SkillPointGeneration.awardWholePoints(player, tree);
-        });
+        ResearchService.advance(player, now - previous);
         syncHud(player);
     }
 
@@ -57,10 +55,12 @@ public final class ProgressionEvents {
         double maximumNutrition = TerraSkillsConfig.GRAIN_POINTS.get() + TerraSkillsConfig.FRUIT_POINTS.get()
                 + TerraSkillsConfig.VEGETABLE_POINTS.get() + TerraSkillsConfig.PROTEIN_POINTS.get()
                 + TerraSkillsConfig.DAIRY_POINTS.get();
-        PlayerProgress.selectedTree(player).flatMap(SkillTreeDefinition::find).ifPresentOrElse(tree -> {
-            double progress = Math.min(1, PlayerProgress.accumulatedPoints(player, tree.id()));
-            double rate = SkillPointGeneration.calculate(player, tree).totalPerDay();
-            PacketDistributor.sendToPlayer(player, new SkillProgressPayload(tree.id().toString(), progress, rate,
+        PlayerProgress.researchQueue(player).stream().findFirst().ifPresentOrElse(research -> {
+            var definition = com.terraskills.research.ResearchCatalog.find(research.category(), research.skill()).orElse(null);
+            if (definition == null) return;
+            double progress = Math.clamp(research.points() / definition.requiredPoints(), 0, 1);
+            double rate = ResearchService.currentRate(player);
+            PacketDistributor.sendToPlayer(player, new SkillProgressPayload(definition.id(), progress, rate,
                     TerraSkillsConfig.REAL_MINUTES_PER_DAY.get() * 60_000.0, ProgressionRuntime.isGenerating(),
                     nutrition.beforeBalance(), maximumNutrition, nutrition.grain().fullness(), nutrition.fruit().fullness(),
                     nutrition.vegetables().fullness(), nutrition.protein().fullness(), nutrition.dairy().fullness()));
@@ -69,5 +69,6 @@ public final class ProgressionEvents {
                         ProgressionRuntime.isGenerating(), nutrition.beforeBalance(), maximumNutrition,
                         nutrition.grain().fullness(), nutrition.fruit().fullness(), nutrition.vegetables().fullness(),
                         nutrition.protein().fullness(), nutrition.dairy().fullness())));
+        PacketDistributor.sendToPlayer(player, ResearchService.queueSnapshot(player));
     }
 }

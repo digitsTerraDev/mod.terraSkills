@@ -1,7 +1,7 @@
 {
-  "scholar_1": { "title": "Scholar 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "paper" } }, "cost": 1 },
-  "scholar_2": { "title": "Scholar 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "book" } }, "cost": 1 },
-  "scholar_3": { "title": "Scholar 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "writable_book" } }, "cost": 1 },
-  "scholar_4": { "title": "Scholar 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "bookshelf" } }, "cost": 1 },
-  "scholar_5": { "title": "Scholar 5", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "enchanted_book" } }, "cost": 1 }
+  "scholar_1": { "title": "Scholar 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "paper" } }, "cost": 10 },
+  "scholar_2": { "title": "Scholar 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "book" } }, "cost": 20 },
+  "scholar_3": { "title": "Scholar 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "writable_book" } }, "cost": 40 },
+  "scholar_4": { "title": "Scholar 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "bookshelf" } }, "cost": 70 },
+  "scholar_5": { "title": "Scholar 5", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "enchanted_book" } }, "cost": 110 }
 }

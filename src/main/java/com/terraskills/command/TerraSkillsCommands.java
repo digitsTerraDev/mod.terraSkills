@@ -11,6 +11,8 @@ import com.terraskills.progression.ProgressionRuntime;
 import com.terraskills.progression.RpgStat;
 import com.terraskills.progression.SkillPointGeneration;
 import com.terraskills.progression.SkillTreeDefinition;
+import com.terraskills.research.ResearchCatalog;
+import com.terraskills.research.ResearchService;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
@@ -21,6 +23,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+import com.terraskills.network.ResearchQueuePayload;
 
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -59,6 +63,22 @@ public final class TerraSkillsCommands {
                         })
                         .executes(context -> select(context.getSource().getPlayerOrException(),
                                 StringArgumentType.getString(context, "tree"))))));
+        root.then(Commands.literal("research")
+                .then(Commands.literal("list").executes(context -> researchList(context.getSource().getPlayerOrException())))
+                .then(Commands.literal("start").then(Commands.argument("research", StringArgumentType.string())
+                        .suggests((context, builder) -> {
+                            ResearchCatalog.all().forEach(definition -> builder.suggest(definition.id()));
+                            return builder.buildFuture();
+                        })
+                        .executes(context -> researchStart(context.getSource().getPlayerOrException(),
+                                StringArgumentType.getString(context, "research")))))
+                .then(Commands.literal("move").then(Commands.argument("from", IntegerArgumentType.integer(1))
+                        .then(Commands.argument("to", IntegerArgumentType.integer(1))
+                                .executes(context -> researchMove(context.getSource().getPlayerOrException(),
+                                        IntegerArgumentType.getInteger(context, "from"), IntegerArgumentType.getInteger(context, "to"))))))
+                .then(Commands.literal("cancel").then(Commands.argument("index", IntegerArgumentType.integer(1))
+                        .executes(context -> researchCancel(context.getSource().getPlayerOrException(),
+                                IntegerArgumentType.getInteger(context, "index"))))));
         root.then(Commands.literal("stat").requires(source -> source.hasPermission(2))
                 .then(Commands.literal("set").then(Commands.argument("targets", EntityArgument.players())
                         .then(Commands.argument("stat", StringArgumentType.word())
@@ -88,6 +108,55 @@ public final class TerraSkillsCommands {
                     return 1;
                 })));
         return root;
+    }
+
+    private static int researchList(ServerPlayer player) {
+        var queue = PlayerProgress.researchQueue(player);
+        if (queue.isEmpty()) {
+            player.sendSystemMessage(Component.literal("Research queue is empty.").withStyle(ChatFormatting.GRAY));
+            return 1;
+        }
+        player.sendSystemMessage(Component.literal("RESEARCH QUEUE").withStyle(ChatFormatting.DARK_AQUA, ChatFormatting.BOLD));
+        for (int index = 0; index < queue.size(); index++) {
+            var entry = queue.get(index);
+            var definition = ResearchCatalog.find(entry.category(), entry.skill()).orElse(null);
+            if (definition == null) continue;
+            String state = String.format(java.util.Locale.ROOT, "%.1f / %d", entry.points(), definition.requiredPoints());
+            player.sendSystemMessage(Component.literal("  " + (index + 1) + ". " + definition.id() + " — " + state)
+                    .withStyle(index == 0 ? ChatFormatting.AQUA : ChatFormatting.GRAY));
+        }
+        return 1;
+    }
+
+    private static int researchStart(ServerPlayer player, String id) {
+        int separator = id.lastIndexOf('/');
+        ResourceLocation category = separator < 1 ? null : ResourceLocation.tryParse(id.substring(0, separator));
+        boolean queued = category != null && ResearchService.enqueue(player, category, id.substring(separator + 1));
+        syncResearchQueue(player);
+        player.sendSystemMessage(Component.literal(queued ? "Research queued: " + id : "That research is unavailable or already queued.")
+                .withStyle(queued ? ChatFormatting.GREEN : ChatFormatting.RED));
+        return queued ? 1 : 0;
+    }
+
+    private static int researchMove(ServerPlayer player, int from, int to) {
+        boolean moved = ResearchService.move(player, from - 1, to - 1);
+        syncResearchQueue(player);
+        player.sendSystemMessage(Component.literal(moved ? "Research queue reordered." : "Invalid queue positions.")
+                .withStyle(moved ? ChatFormatting.GREEN : ChatFormatting.RED));
+        return moved ? 1 : 0;
+    }
+
+    private static int researchCancel(ServerPlayer player, int index) {
+        boolean cancelled = ResearchService.cancel(player, index - 1);
+        syncResearchQueue(player);
+        player.sendSystemMessage(Component.literal(cancelled ? "Research cancelled; saved progress was discarded." : "Invalid queue position.")
+                .withStyle(cancelled ? ChatFormatting.YELLOW : ChatFormatting.RED));
+        return cancelled ? 1 : 0;
+    }
+
+    /** Commands mutate the queue between normal tick snapshots, so update the open terminal immediately. */
+    private static void syncResearchQueue(ServerPlayer player) {
+        PacketDistributor.sendToPlayer(player, ResearchService.queueSnapshot(player));
     }
 
     private static int help(CommandSourceStack source) {

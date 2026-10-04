@@ -18,9 +18,14 @@ public final class SkillPointGeneration {
     private SkillPointGeneration() {}
 
     public static Breakdown calculate(ServerPlayer player, SkillTreeDefinition tree) {
+        return calculate(player, tree.primary(), tree.secondary());
+    }
+
+    /** Calculates the work-rate for one research item using its own stat affinities. */
+    public static Breakdown calculate(ServerPlayer player, RpgStat primaryStat, RpgStat secondaryStat) {
         NutritionBreakdown nutrition = calculateNutrition(player);
-        int primary = PlayerProgress.getStat(player, tree.primary());
-        int secondary = PlayerProgress.getStat(player, tree.secondary());
+        int primary = PlayerProgress.getStat(player, primaryStat);
+        int secondary = PlayerProgress.getStat(player, secondaryStat);
         double statMultiplier = 1
                 + primary * TerraSkillsConfig.PRIMARY_BONUS_PER_STAT.get()
                 + secondary * TerraSkillsConfig.SECONDARY_BONUS_PER_STAT.get();

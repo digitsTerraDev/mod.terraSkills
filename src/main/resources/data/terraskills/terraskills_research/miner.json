@@ -1,0 +1,36 @@
+{
+  "title": "Miner",
+  "requires": {
+    "ore_fortune": ["miner_2"],
+    "prospecting": ["miner_2"],
+    "stoneworking": ["miner_3"],
+    "deep_mining": ["miner_3"],
+    "tool_conservation": ["miner_4"],
+    "gemology": ["prospecting_2"],
+    "motherlode": ["ore_fortune_3", "deep_mining_3"]
+  },
+  "skills": [
+    {
+      "id":"mining",
+      "title":"Mining",
+      "description":"Improves general mining speed.",
+      "primary_stat":"endurance","secondary_stat":"instinct",
+      "research_bonuses":["+X% mining speed per level"],
+      "levels":[
+        {"skill":"miner_1","cost":10},
+        {"skill":"miner_2","cost":20},
+        {"skill":"miner_3","cost":40},
+        {"skill":"miner_4","cost":70},
+        {"skill":"miner_5","cost":110}
+      ]
+    },
+
+    {"id":"ore_fortune","title":"Ore Fortune","description":"Improves ore obtained from mining.","primary_stat":"instinct","secondary_stat":"endurance","research_bonuses":["+X% ore yield per level"],"levels":[{"skill":"ore_fortune_1","cost":10},{"skill":"ore_fortune_2","cost":20},{"skill":"ore_fortune_3","cost":40},{"skill":"ore_fortune_4","cost":70},{"skill":"ore_fortune_5","cost":110}]},
+    {"id":"prospecting","title":"Prospecting","description":"Improves prospecting and pick detection range.","primary_stat":"instinct","secondary_stat":"intelligence","research_bonuses":["+X% prospecting/pick detection range per level"],"levels":[{"skill":"prospecting_1","cost":10},{"skill":"prospecting_2","cost":20},{"skill":"prospecting_3","cost":40},{"skill":"prospecting_4","cost":70},{"skill":"prospecting_5","cost":110}]},
+    {"id":"stoneworking","title":"Stoneworking","description":"Improves stone mining speed.","primary_stat":"endurance","secondary_stat":"might","research_bonuses":["+X% stone mining speed per level"],"levels":[{"skill":"stoneworking_1","cost":10},{"skill":"stoneworking_2","cost":20},{"skill":"stoneworking_3","cost":40},{"skill":"stoneworking_4","cost":70},{"skill":"stoneworking_5","cost":110}]},
+    {"id":"deep_mining","title":"Deep Mining","description":"Improves mining below the configured depth.","primary_stat":"endurance","secondary_stat":"might","research_bonuses":["+X% speed below a certain Y level per level"],"levels":[{"skill":"deep_mining_1","cost":10},{"skill":"deep_mining_2","cost":20},{"skill":"deep_mining_3","cost":40},{"skill":"deep_mining_4","cost":70},{"skill":"deep_mining_5","cost":110}]},
+    {"id":"tool_conservation","title":"Tool Conservation","description":"Reduces pick durability consumption.","primary_stat":"intelligence","secondary_stat":"instinct","research_bonuses":["-X% pick durability usage per level"],"levels":[{"skill":"tool_conservation_1","cost":10},{"skill":"tool_conservation_2","cost":20},{"skill":"tool_conservation_3","cost":40},{"skill":"tool_conservation_4","cost":70},{"skill":"tool_conservation_5","cost":110}]},
+    {"id":"gemology","title":"Gemology","description":"Improves gem discovery and yield.","primary_stat":"instinct","secondary_stat":"intelligence","research_bonuses":["+X% gem drop chance/yield per level"],"levels":[{"skill":"gemology_1","cost":10},{"skill":"gemology_2","cost":20},{"skill":"gemology_3","cost":40},{"skill":"gemology_4","cost":70},{"skill":"gemology_5","cost":110}]},
+    {"id":"motherlode","title":"Motherlode","description":"Creates a chance for extra ore from natural deposits.","primary_stat":"instinct","secondary_stat":"endurance","research_bonuses":["+X% chance for bonus ore when mining natural deposits per level"],"levels":[{"skill":"motherlode_1","cost":10},{"skill":"motherlode_2","cost":20},{"skill":"motherlode_3","cost":40},{"skill":"motherlode_4","cost":70},{"skill":"motherlode_5","cost":110}]}
+  ]
+}

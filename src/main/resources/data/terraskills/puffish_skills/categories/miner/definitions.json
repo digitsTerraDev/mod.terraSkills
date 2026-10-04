@@ -1,7 +1,32 @@
 {
-  "miner_1": { "title": "Miner 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "wooden_pickaxe" } }, "cost": 1 },
-  "miner_2": { "title": "Miner 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "stone_pickaxe" } }, "cost": 1 },
-  "miner_3": { "title": "Miner 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "iron_pickaxe" } }, "cost": 1 },
-  "miner_4": { "title": "Miner 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "golden_pickaxe" } }, "cost": 1 },
-  "miner_5": { "title": "Miner 5", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "diamond_pickaxe" } }, "cost": 1 }
+  "miner_1": { "title": "Miner 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "wooden_pickaxe" } }, "cost": 10 },
+  "miner_2": { "title": "Miner 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "stone_pickaxe" } }, "cost": 20 },
+  "miner_3": { "title": "Miner 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "iron_pickaxe" } }, "cost": 40 },
+  "miner_4": { "title": "Miner 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "golden_pickaxe" } }, "cost": 70 },
+  "miner_5": { "title": "Mining V", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "diamond_pickaxe" } }, "cost": 110 },
+
+  "ore_fortune_1":{
+    "title":"Ore Fortune I",
+    "icon":{
+      "type":"item","data": {"item":"iron_ore"}
+    },
+    "cost":10
+  },
+
+  "ore_fortune_2":{
+    "title":"Ore Fortune II",
+    "icon":{
+      "type":"item",
+      "data":{"item":"iron_ore"}
+    },
+    "cost":20
+  },
+
+  "ore_fortune_3":{"title":"Ore Fortune III","icon":{"type":"item","data":{"item":"iron_ore"}},"cost":40},"ore_fortune_4":{"title":"Ore Fortune IV","icon":{"type":"item","data":{"item":"iron_ore"}},"cost":70},"ore_fortune_5":{"title":"Ore Fortune V","icon":{"type":"item","data":{"item":"iron_ore"}},"cost":110},
+  "prospecting_1":{"title":"Prospecting I","icon":{"type":"item","data":{"item":"compass"}},"cost":10},"prospecting_2":{"title":"Prospecting II","icon":{"type":"item","data":{"item":"compass"}},"cost":20},"prospecting_3":{"title":"Prospecting III","icon":{"type":"item","data":{"item":"compass"}},"cost":40},"prospecting_4":{"title":"Prospecting IV","icon":{"type":"item","data":{"item":"compass"}},"cost":70},"prospecting_5":{"title":"Prospecting V","icon":{"type":"item","data":{"item":"compass"}},"cost":110},
+  "stoneworking_1":{"title":"Stoneworking I","icon":{"type":"item","data":{"item":"cobblestone"}},"cost":10},"stoneworking_2":{"title":"Stoneworking II","icon":{"type":"item","data":{"item":"cobblestone"}},"cost":20},"stoneworking_3":{"title":"Stoneworking III","icon":{"type":"item","data":{"item":"cobblestone"}},"cost":40},"stoneworking_4":{"title":"Stoneworking IV","icon":{"type":"item","data":{"item":"cobblestone"}},"cost":70},"stoneworking_5":{"title":"Stoneworking V","icon":{"type":"item","data":{"item":"cobblestone"}},"cost":110},
+  "deep_mining_1":{"title":"Deep Mining I","icon":{"type":"item","data":{"item":"deepslate"}},"cost":10},"deep_mining_2":{"title":"Deep Mining II","icon":{"type":"item","data":{"item":"deepslate"}},"cost":20},"deep_mining_3":{"title":"Deep Mining III","icon":{"type":"item","data":{"item":"deepslate"}},"cost":40},"deep_mining_4":{"title":"Deep Mining IV","icon":{"type":"item","data":{"item":"deepslate"}},"cost":70},"deep_mining_5":{"title":"Deep Mining V","icon":{"type":"item","data":{"item":"deepslate"}},"cost":110},
+  "tool_conservation_1":{"title":"Tool Conservation I","icon":{"type":"item","data":{"item":"anvil"}},"cost":10},"tool_conservation_2":{"title":"Tool Conservation II","icon":{"type":"item","data":{"item":"anvil"}},"cost":20},"tool_conservation_3":{"title":"Tool Conservation III","icon":{"type":"item","data":{"item":"anvil"}},"cost":40},"tool_conservation_4":{"title":"Tool Conservation IV","icon":{"type":"item","data":{"item":"anvil"}},"cost":70},"tool_conservation_5":{"title":"Tool Conservation V","icon":{"type":"item","data":{"item":"anvil"}},"cost":110},
+  "gemology_1":{"title":"Gemology I","icon":{"type":"item","data":{"item":"amethyst_shard"}},"cost":10},"gemology_2":{"title":"Gemology II","icon":{"type":"item","data":{"item":"amethyst_shard"}},"cost":20},"gemology_3":{"title":"Gemology III","icon":{"type":"item","data":{"item":"amethyst_shard"}},"cost":40},"gemology_4":{"title":"Gemology IV","icon":{"type":"item","data":{"item":"amethyst_shard"}},"cost":70},"gemology_5":{"title":"Gemology V","icon":{"type":"item","data":{"item":"amethyst_shard"}},"cost":110},
+  "motherlode_1":{"title":"Motherlode I","icon":{"type":"item","data":{"item":"raw_iron"}},"cost":10},"motherlode_2":{"title":"Motherlode II","icon":{"type":"item","data":{"item":"raw_iron"}},"cost":20},"motherlode_3":{"title":"Motherlode III","icon":{"type":"item","data":{"item":"raw_iron"}},"cost":40},"motherlode_4":{"title":"Motherlode IV","icon":{"type":"item","data":{"item":"raw_iron"}},"cost":70},"motherlode_5":{"title":"Motherlode V","icon":{"type":"item","data":{"item":"raw_iron"}},"cost":110}
 }
